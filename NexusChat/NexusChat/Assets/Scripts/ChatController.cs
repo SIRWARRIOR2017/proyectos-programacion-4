@@ -16,7 +16,7 @@ public class ChatController : MonoBehaviour
     {
         currentUsername = PlayerPrefs.GetString("username", "Usuario");
 
-        // Leer el canal/servidor seleccionado (guardado por ServerListController)
+        
         string currentChannel = PlayerPrefs.GetString("currentChannel", "#general");
         if (string.IsNullOrEmpty(currentChannel))
             currentChannel = "#general";
@@ -44,7 +44,13 @@ public class ChatController : MonoBehaviour
         messageInputField.text = string.Empty;
         messageInputField.ActivateInputField();
         ScrollToBottom();
+
+        GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("notificationVolume", 0.7f);
+        GetComponent<AudioSource>().Play();
     }
+
+
+    
 
     public void OnGoToServersButtonClicked()
     {
@@ -74,6 +80,8 @@ public class ChatController : MonoBehaviour
             return;
         }
 
+  
+
         if (messagesContainer == null)
         {
             Debug.LogError("ChatController: messagesContainer (Content del ScrollView) no está asignado en el Inspector.");
@@ -87,7 +95,7 @@ public class ChatController : MonoBehaviour
             return;
         }
 
-        // Asegurar que el item tiene MessageItem y configurarlo
+        
         MessageItem messageItem = item.GetComponent<MessageItem>();
         if (messageItem == null)
         {
@@ -98,7 +106,7 @@ public class ChatController : MonoBehaviour
         messageItem.SetData(sender, content);
         DebugLogger.Log("ChatController: SpawnMessageItem sender='" + sender + "' content='" + (content.Length > 50 ? content.Substring(0, 50) + "..." : content) + "'");
 
-        // Forzar que el layout se actualice y el nuevo item quede al final
+        
         item.transform.SetAsLastSibling();
         var rt = messagesContainer as RectTransform;
         if (rt != null)

@@ -18,12 +18,12 @@ public class RegisterController : MonoBehaviour
     {
         if (!AreFieldsValid())
             return;
-        // Usar versiones saneadas de los campos
+
         string username = usernameInputField?.text?.Trim() ?? string.Empty;
         string email = emailInputField?.text?.Trim().ToLowerInvariant() ?? string.Empty;
         string password = passwordInputField?.text ?? string.Empty;
 
-        // Si ya hay una cuenta registrada con ese email, no permitir re-registro
+ 
         string existingEmail = PlayerPrefs.GetString("email", string.Empty);
         if (!string.IsNullOrEmpty(existingEmail) && existingEmail == email)
         {
@@ -33,7 +33,7 @@ public class RegisterController : MonoBehaviour
 
         PlayerPrefs.SetString("username", username);
         PlayerPrefs.SetString("email", email);
-        // Guardar contraseña para permitir login (en un proyecto real no usar PlayerPrefs para contraseñas en texto claro)
+        
         PlayerPrefs.SetString("password", password);
         PlayerPrefs.Save();
         DebugLogger.Log("RegisterController: datos guardados en PlayerPrefs email='" + email + "' username='" + username + "'");
@@ -50,7 +50,7 @@ public class RegisterController : MonoBehaviour
     {
         string username = usernameInputField?.text?.Trim() ?? string.Empty;
         string email = emailInputField?.text?.Trim() ?? string.Empty;
-        string password = passwordInputField?.text ?? string.Empty; // passwords may contain spaces
+        string password = passwordInputField?.text ?? string.Empty; 
         string confirm = confirmPasswordInputField?.text ?? string.Empty;
 
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirm))
@@ -65,7 +65,7 @@ public class RegisterController : MonoBehaviour
             return false;
         }
 
-        // Compare passwords exactly but defensively (trim username/email only)
+        
         if (!string.Equals(password, confirm, System.StringComparison.Ordinal))
         {
             ShowError("Las contraseñas no coinciden.");

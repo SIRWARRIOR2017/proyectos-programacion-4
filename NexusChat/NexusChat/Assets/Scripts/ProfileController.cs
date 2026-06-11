@@ -33,7 +33,7 @@ public class ProfileController : MonoBehaviour
         if (volumeSlider != null)
         {
             volumeSlider.value = savedVolume;
-            // Añadimos listener para que el texto se actualice cuando el usuario mueva el slider
+            
             volumeSlider.onValueChanged.RemoveListener(OnVolumeChanged);
             volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
         }
@@ -55,9 +55,7 @@ public class ProfileController : MonoBehaviour
 
     public void OnLogoutButtonClicked()
     {
-        // No borramos todas las PlayerPrefs aquí porque contiene las credenciales guardadas
-        // (PlayerPrefs.DeleteAll() elimina email/password y provoca que no se pueda volver a iniciar sesión).
-        // En su lugar, reseteamos solo el estado de sesión si es necesario.
+      
         PlayerPrefs.SetInt("isLoggedIn", 0);
         PlayerPrefs.Save();
         DebugLogger.Log("ProfileController: OnLogoutButtonClicked - cleared session flag, returning to LoginPanel");

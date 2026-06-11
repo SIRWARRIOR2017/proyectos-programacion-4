@@ -19,7 +19,7 @@ public class LoginController : MonoBehaviour
         if (!AreFieldsValid())
             return;
 
-        // Validar credenciales contra lo registrado
+        
         string savedEmail = PlayerPrefs.GetString("email", string.Empty).ToLowerInvariant().Trim();
         string savedPassword = PlayerPrefs.GetString("password", string.Empty);
         string enteredEmail = emailInputField.text?.Trim().ToLowerInvariant() ?? string.Empty;
@@ -45,7 +45,7 @@ public class LoginController : MonoBehaviour
 
     private bool AreFieldsValid()
     {
-        // Trim inputs to avoid accidental leading/trailing spaces
+        
         emailInputField.text = emailInputField.text?.Trim() ?? string.Empty;
         passwordInputField.text = passwordInputField.text?.Trim() ?? string.Empty;
 
@@ -61,14 +61,14 @@ public class LoginController : MonoBehaviour
             return false;
         }
 
-        // Minimum password length (coincidir con el valor de registro)
+        
         if (passwordInputField.text.Length < 6)
         {
             ShowError("La contraseña debe tener al menos 8 caracteres.");
             return false;
         }
 
-        // Clear any previous error when validation passes
+        
         errorText.gameObject.SetActive(false);
         return true;
     }

@@ -12,7 +12,6 @@ public class ServerListController : MonoBehaviour
         UIManager.Instance.ShowPanel("ChatPanel");
     }
 
-    // Sobrecarga que acepta el nombre del servidor (se puede pasar desde el Button -> OnClick con un string)
     public void OnServerSelected(string serverName)
     {
         if (UIManager.Instance == null)
@@ -21,7 +20,6 @@ public class ServerListController : MonoBehaviour
             return;
         }
 
-        // Guardamos el nombre del canal/servidor para que ChatController lo lea al activarse
         PlayerPrefs.SetString("currentChannel", serverName);
         DebugLogger.Log("ServerListController: servidor seleccionado='" + serverName + "'");
         UIManager.Instance.ShowPanel("ChatPanel");
